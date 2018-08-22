@@ -9,7 +9,7 @@ env:
 
 before_install:
   - sudo apt-get install -y curl rsync tar make perl perl-base build-essential libncurses-dev libexpat1-dev libssl-dev libmysqlclient-dev libxml2-dev
-  - cpanm --notest JSON JSON::Parse XML::Parser XML::Simple LWP LWP::Simple LWP::Protocol::https Archive::Extract Archive::Tar Archive::Zip CGI DBI Time::HiRes DBD::mysql
+  - cpanm --notest JSON JSON::Parse XML::Parser XML::Simple LWP LWP::Simple LWP::Protocol::https Archive::Extract Archive::Tar Archive::Zip CGI DBI Time::HiRes DBD::mysql Bio::Perl
 
 install:
   - mkdir $VEP_PATH $VEP_DATA
