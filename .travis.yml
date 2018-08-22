@@ -17,7 +17,7 @@ install:
   - tar -zxf 91.3.tar.gz
   - mv ensembl-vep-release-91.3 $VEP_PATH
   - cd $VEP_PATH/ensembl-vep-release-91.3
-  - perl INSTALL.pl --AUTO acf --SPECIES homo_sapiens --ASSEMBLY GRCh37 --DESTDIR $VEP_PATH --CACHEDIR $VEP_DATA
+  - echo "y" | perl INSTALL.pl --AUTO acf --SPECIES homo_sapiens --ASSEMBLY GRCh37 --CACHEDIR $VEP_DATA
   - perl convert_cache.pl --species homo_sapiens --version $VER\_GRCh37 --dir $VEP_DATA
   - cd $TRAVIS_BUILD_DIR
 
