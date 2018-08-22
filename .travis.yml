@@ -3,9 +3,6 @@ language: perl
 perl:
   - "5.22"
 
-branches:
-  only:
-    - master
 
 env:
   - VEP_PATH=$HOME/vep VEP_DATA=$HOME/.vep VER=91 PERL5LIB=$VEP_PATH:$PERL5LIB PATH=$VEP_PATH/htslib:$PATH
@@ -19,7 +16,7 @@ install:
   - curl -LO https://github.com/Ensembl/ensembl-vep/archive/release/91.3.tar.gz
   - tar -zxf 91.3.tar.gz
   - mv ensembl-vep-release-91.3 $VEP_PATH
-  - cd $VEP_PATH
+  - cd $VEP_PATH/ensembl-vep-release-91.3
   - perl INSTALL.pl --AUTO acf --SPECIES homo_sapiens --ASSEMBLY GRCh37 --DESTDIR $VEP_PATH --CACHEDIR $VEP_DATA
   - perl convert_cache.pl --species homo_sapiens --version $VER\_GRCh37 --dir $VEP_DATA
   - cd $TRAVIS_BUILD_DIR
