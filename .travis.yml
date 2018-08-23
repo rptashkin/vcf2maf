@@ -12,14 +12,10 @@ before_install:
   - cpanm --notest JSON JSON::Parse XML::Parser XML::Simple LWP LWP::Simple LWP::Protocol::https Archive::Extract Archive::Tar Archive::Zip CGI DBI Time::HiRes DBD::mysql Bio::Perl
 
 install:
-  - mkdir $VEP_PATH $VEP_DATA
-  - curl -LO https://github.com/Ensembl/ensembl-vep/archive/release/91.3.tar.gz
-  - tar -zxf 91.3.tar.gz
-  - mv ensembl-vep-release-91.3 $VEP_PATH
-  - cd $VEP_PATH/ensembl-vep-release-91.3
-  - perl INSTALL.pl --AUTO acf --SPECIES homo_sapiens --ASSEMBLY GRCh37 --CACHEDIR $VEP_DATA
-  - perl convert_cache.pl --species homo_sapiens --version $VER\_GRCh37 --dir $VEP_DATA
-  - cd $TRAVIS_BUILD_DIR
-
+  - git clone https://github.com/Ensembl/ensembl-vep.git
+  - cd ensembl-vep
+  - perl INSTALL.pl
+  ## - perl INSTALL.pl --AUTO acf --SPECIES homo_sapiens --ASSEMBLY GRCh37 --CACHEDIR $VEP_DATA
+  
 script:
   - perl vcf2maf.pl --input-vcf tests/test.vcf --output-maf tests/test.vep.maf --custom-enst data/isoform_overrides_at_mskcc --vep-forks 1
