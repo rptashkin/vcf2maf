@@ -14,8 +14,8 @@ before_install:
 install:
   - git clone https://github.com/Ensembl/ensembl-vep.git
   - cd ensembl-vep
-  - perl INSTALL.pl
+  - perl INSTALL.pl --AUTO acf --SPECIES homo_sapiens --ASSEMBLY GRCh37 --CACHEDIR $VEP_DATA
   ## - perl INSTALL.pl --AUTO acf --SPECIES homo_sapiens --ASSEMBLY GRCh37 --CACHEDIR $VEP_DATA
-  
+
 script:
   - perl vcf2maf.pl --input-vcf tests/test.vcf --output-maf tests/test.vep.maf --custom-enst data/isoform_overrides_at_mskcc --vep-forks 1
