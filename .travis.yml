@@ -14,7 +14,8 @@ before_install:
 install:
   - git clone https://github.com/Ensembl/ensembl-vep.git
   - cd ensembl-vep
-  - travis_wait 90 perl INSTALL.pl --AUTO acf --SPECIES homo_sapiens --ASSEMBLY GRCh37 --CACHEDIR $VEP_DATA
+  - travis_wait 120 sleep infinity &
+    perl INSTALL.pl --AUTO acf --SPECIES homo_sapiens --ASSEMBLY GRCh37 --CACHEDIR $VEP_DATA
   ## - perl INSTALL.pl --AUTO acf --SPECIES homo_sapiens --ASSEMBLY GRCh37 --CACHEDIR $VEP_DATA
 
 script:
