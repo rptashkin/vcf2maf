@@ -15,7 +15,7 @@ install:
   - git clone https://github.com/Ensembl/ensembl-vep.git
   - cd ensembl-vep
   - travis_wait 120 sleep infinity &
-    perl INSTALL.pl --AUTO acf --SPECIES saccharomyces_cerevisiae_vep_40_R64-1-1 --CACHEDIR $VEP_DATA
+    perl INSTALL.pl --AUTO acf --SPECIES danio_rerio --CACHEDIR $VEP_DATA
   ## - perl INSTALL.pl --AUTO acf --SPECIES homo_sapiens --ASSEMBLY GRCh37 --CACHEDIR $VEP_DATA
 
 script:
