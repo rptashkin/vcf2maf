@@ -12,6 +12,15 @@ before_install:
   - cpanm --notest JSON JSON::Parse XML::Parser XML::Simple LWP LWP::Simple LWP::Protocol::https Archive::Extract Archive::Tar Archive::Zip CGI DBI Time::HiRes DBD::mysql Bio::Perl
 
 install:
+  ## install samtools
+  - wget https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2
+  - tar -vxjf samtools-1.9.tar.bz2
+  - cd samtools-1.9
+  - make
+  - sudo make install;
+  - cd ..
+  - git clone https://github.com/samtools/samtools.git
+  - cd samtools; make; make install; cd ..
   - git clone -b rel93-installtest --single-branch https://github.com/aparton/ensembl-vep.git
   - cd ensembl-vep
   - travis_wait 180 sleep infinity &
