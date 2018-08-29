@@ -12,11 +12,11 @@ before_install:
   - cpanm --notest JSON JSON::Parse XML::Parser XML::Simple LWP LWP::Simple LWP::Protocol::https Archive::Extract Archive::Tar Archive::Zip CGI DBI Time::HiRes DBD::mysql Bio::Perl
 
 install:
-  - git clone https://github.com/Ensembl/ensembl-vep.git
+  - git clone -b rel93-installtest --single-branch https://github.com/aparton/ensembl-vep.git
   - cd ensembl-vep
-  - travis_wait 120 sleep infinity &
+  - travis_wait 180 sleep infinity &
     perl INSTALL.pl --AUTO acf --SPECIES homo_sapiens --ASSEMBLY GRCh37 --CACHEDIR $VEP_DATA
-    - cd ..
+  - cd ..
   ## - perl INSTALL.pl --AUTO acf --SPECIES homo_sapiens --ASSEMBLY GRCh37 --CACHEDIR $VEP_DATA
 
 script:
