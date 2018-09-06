@@ -45,6 +45,7 @@ install:
   - echo "y" | perl INSTALL.pl --AUTO acf  --SPECIES saccharomyces_cerevisiae --ASSEMBLY R64-1-1  --CACHEDIR $VEP_DATA
   - pwd
   - cd ..
+  - cd /home/travis/build/mskcc/vcf2maf  ## explicitly move into this subdirectory
   - pwd
   ## - perl INSTALL.pl --AUTO acf --SPECIES homo_sapiens --ASSEMBLY GRCh37 --CACHEDIR $VEP_DATA
 
