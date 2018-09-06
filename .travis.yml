@@ -43,7 +43,7 @@ install:
   - git clone https://github.com/aparton/ensembl-vep.git
   - cd ensembl-vep
   - ls
-  - echo "n" | perl INSTALL.pl --AUTO acf  --SPECIES saccharomyces_cerevisiae --ASSEMBLY R64-1-1  --CACHEDIR $VEP_DATA --ref-fasta /home/travis/.vep/saccharomyces_cerevisiae/91_R64-1-1/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz
+  - echo "n" | perl INSTALL.pl --AUTO acf  --SPECIES saccharomyces_cerevisiae --ASSEMBLY R64-1-1  --CACHEDIR $VEP_DATA 
   - pwd
   - ls
   - cd ..
@@ -55,4 +55,7 @@ install:
   ## - perl INSTALL.pl --AUTO acf --SPECIES homo_sapiens --ASSEMBLY GRCh37 --CACHEDIR $VEP_DATA
 
 script:
-  - perl vcf2maf.pl --input-vcf tests/test.vcf --output-maf tests/test.vep.maf --custom-enst data/isoform_overrides_at_mskcc --vep-forks 1
+  - perl vcf2maf.pl --input-vcf tests/test.vcf --output-maf tests/test.vep.maf --custom-enst data/isoform_overrides_at_mskcc --vep-forks 1 --ref-fasta /home/travis/.vep/saccharomyces_cerevisiae/91_R64-1-1/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz
+
+
+
