@@ -36,7 +36,7 @@ install:
   - tar -vxjf samtools-1.9.tar.bz2
   - cd samtools-1.9
   - make
-  - make install;
+  ## - make install;  later try setting the installation path via `/home/travis/`
   - cd ..
   - git clone -b rel93-installtest --single-branch https://github.com/aparton/ensembl-vep.git
   - cd ensembl-vep
