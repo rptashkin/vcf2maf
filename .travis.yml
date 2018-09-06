@@ -40,10 +40,10 @@ install:
   ## - make
   ## - make install;  later try setting the installation path via `/home/travis/`
   - cd ..
-  - git clone https://github.com/aparton/ensembl-vep.git
+  - git clone --single-branch -b release/93 https://github.com/aparton/ensembl-vep.git
   - cd ensembl-vep
   - ls
-  - echo "n" | echo "y" | perl INSTALL.pl --AUTO acf  --SPECIES saccharomyces_cerevisiae --ASSEMBLY R64-1-1  --CACHEDIR $VEP_DATA --DESTDIR /home/travis/build/mskcc/ensembl-vep/vep
+  - perl INSTALL.pl --AUTO acf  --SPECIES saccharomyces_cerevisiae --ASSEMBLY R64-1-1  --CACHEDIR $VEP_DATA --DESTDIR /home/travis/build/mskcc/ensembl-vep/vep
   - pwd
   - ls
   - cd ..
