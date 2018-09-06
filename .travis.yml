@@ -21,6 +21,7 @@ addons:
     - libmysqlclient-dev 
     - libxml2-dev
     - tabix
+    - samtools 
 
 env:
   - VEP_PATH=$HOME/vep VEP_DATA=$HOME/.vep VER=93 PERL5LIB=$VEP_PATH:$PERL5LIB PATH=$VEP_PATH/htslib:$PATH
@@ -32,10 +33,11 @@ before_install:
 install:
   ## - sudo apt-get install tabix
   ## install samtools
-  - wget https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2
-  - tar -vxjf samtools-1.9.tar.bz2
-  - cd samtools-1.9
-  - make
+  ## we should be able to do this via apt-get
+  ## - wget https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2
+  ## - tar -vxjf samtools-1.9.tar.bz2
+  ## - cd samtools-1.9
+  ## - make
   ## - make install;  later try setting the installation path via `/home/travis/`
   - cd ..
   - git clone -b rel93-installtest --single-branch https://github.com/aparton/ensembl-vep.git
