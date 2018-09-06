@@ -3,22 +3,38 @@ language: perl
 perl:
   - "5.22"
 
+addons:
+  apt:
+    packages:
+    - curl 
+    - rsync 
+    - tar 
+    - make 
+    - perl 
+    - perl-base 
+    - build-essential 
+    - libncurses-dev 
+    - libexpat1-dev 
+    - libssl-dev 
+    - libmysqlclient-dev 
+    - libxml2-dev
+    - tabix
 
 env:
   - VEP_PATH=$HOME/vep VEP_DATA=$HOME/.vep VER=93 PERL5LIB=$VEP_PATH:$PERL5LIB PATH=$VEP_PATH/htslib:$PATH
 
 before_install:
-  - sudo apt-get install -y curl rsync tar make perl perl-base build-essential libncurses-dev libexpat1-dev libssl-dev libmysqlclient-dev libxml2-dev
+  ## - sudo apt-get install -y curl rsync tar make perl perl-base build-essential libncurses-dev libexpat1-dev libssl-dev libmysqlclient-dev libxml2-dev
   - cpanm --notest JSON JSON::Parse XML::Parser XML::Simple LWP LWP::Simple LWP::Protocol::https Archive::Extract Archive::Tar Archive::Zip CGI DBI Time::HiRes DBD::mysql Bio::Perl
 
 install:
-  - sudo apt-get install tabix
+  ## - sudo apt-get install tabix
   ## install samtools
   - wget https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2
   - tar -vxjf samtools-1.9.tar.bz2
   - cd samtools-1.9
   - make
-  - sudo make install;
+  - make install;
   - cd ..
   - git clone -b rel93-installtest --single-branch https://github.com/aparton/ensembl-vep.git
   - cd ensembl-vep
