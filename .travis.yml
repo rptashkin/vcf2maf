@@ -24,7 +24,7 @@ addons:
     - samtools 
 
 env:
-  - VEP_PATH=/home/travis/build/mskcc/ensembl-vep/vep VEP_DATA=$HOME/.vep VER=93 PERL5LIB=$VEP_PATH:$PERL5LIB PATH=$VEP_PATH/htslib:$PATH
+  - VEP_PATH=$HOME/vep VEP_DATA=$HOME/.vep VER=93 PERL5LIB=$VEP_PATH:$PERL5LIB PATH=$VEP_PATH/htslib:$PATH
 
 before_install:
   ## - sudo apt-get install -y curl rsync tar make perl perl-base build-essential libncurses-dev libexpat1-dev libssl-dev libmysqlclient-dev libxml2-dev
@@ -55,7 +55,7 @@ install:
   ## - perl INSTALL.pl --AUTO acf --SPECIES homo_sapiens --ASSEMBLY GRCh37 --CACHEDIR $VEP_DATA
 
 script:
-  - perl vcf2maf.pl --input-vcf tests/test.vcf --filter-vcf "" --output-maf tests/test.vep.maf --custom-enst data/isoform_overrides_at_mskcc --vep-forks 1 --ref-fasta /home/travis/.vep/saccharomyces_cerevisiae/91_R64-1-1/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz
+  - perl vcf2maf.pl --input-vcf tests/test.vcf --filter-vcf "" --output-maf tests/test.vep.maf --custom-enst data/isoform_overrides_at_mskcc --vep-forks 1 --ref-fasta /home/travis/.vep/saccharomyces_cerevisiae/91_R64-1-1/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa.gz --vep-path /home/travis/build/mskcc/ensembl-vep/vep
 
 
 
