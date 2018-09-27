@@ -3,6 +3,7 @@ language: perl
 perl:
   - "5.22"
 
+sudo: false
 
 env:
   - VEP_PATH=$HOME/vep VEP_DATA=$HOME/.vep VER=93 PERL5LIB=$VEP_PATH:$PERL5LIB PATH=$VEP_PATH/htslib:$PATH
