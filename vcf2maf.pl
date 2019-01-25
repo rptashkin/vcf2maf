@@ -716,14 +716,27 @@ while( my $line = $annotated_vcf_fh->getline ) {
             # Skip effects on other ALT alleles. If ALLELE_NUM is undefined (e.g. for INFO:SVTYPE), don't skip any
             push( @all_effects, \%effect ) unless( $effect{ALLELE_NUM} and $effect{ALLELE_NUM} != $var_allele_idx );
         }
-
-        # Sort effects first by transcript biotype, then by severity, and then by longest transcript
-        @all_effects = sort {
-            GetBiotypePriority( $a->{BIOTYPE} ) <=> GetBiotypePriority( $b->{BIOTYPE} ) ||
-            GetEffectPriority( $a->{One_Consequence} ) <=> GetEffectPriority( $b->{One_Consequence} ) ||
-            $b->{Transcript_Length} <=> $a->{Transcript_Length}
-        } @all_effects;
-
+        # Search effects for entries with canonical transcript from $custom_enst_file, if provided.
+        # If one ore more entries found, use only those for subsequent sorting based on
+        # first by transcript biotype, then by severity, and then by longest transcript
+        my @canonical_effects = grep { $custom_enst{$_->{Transcript_ID}} } @all_effects;
+        my @non_canonical_effects = grep { ! $custom_enst{$_->{Transcript_ID}} } @all_effects;
+        if (scalar(@canonical_effects) >= 1 ){
+            @canonical_effects = sort {
+                GetBiotypePriority( $a->{BIOTYPE} ) <=> GetBiotypePriority( $b->{BIOTYPE} ) ||
+                GetEffectPriority( $a->{One_Consequence} ) <=> GetEffectPriority( $b->{One_Consequence} ) ||
+                $b->{Transcript_Length} <=> $a->{Transcript_Length}
+            } @canonical_effects;
+            @all_effects = (@canonical_effects, @non_canonical_effects);
+        }
+        else{
+            # Sort effects first by transcript biotype, then by severity, and then by longest transcript
+            @all_effects = sort {
+                GetBiotypePriority( $a->{BIOTYPE} ) <=> GetBiotypePriority( $b->{BIOTYPE} ) ||
+                GetEffectPriority( $a->{One_Consequence} ) <=> GetEffectPriority( $b->{One_Consequence} ) ||
+                $b->{Transcript_Length} <=> $a->{Transcript_Length}
+            } @all_effects;
+        }
         # Find the highest priority effect with a gene symbol (usually the first one)
         my ( $effect_with_gene_name ) = grep { $_->{SYMBOL} } @all_effects;
         my $maf_gene = $effect_with_gene_name->{SYMBOL} if( $effect_with_gene_name );
